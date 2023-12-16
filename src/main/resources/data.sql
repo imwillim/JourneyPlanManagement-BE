@@ -109,7 +109,30 @@ VALUES
     ('Historical City Walk', 'Take a stroll through historical city streets', 8, '2025-04-05', '2025-04-15', 8, 7500, 10, 9, 'IN_PROGRESS', 0),
     ('Hot Air Balloon Safari', 'Experience a safari from the skies in a hot air balloon', 9, '2025-05-01', '2025-05-10', 9, 12000, 11, 10, 'PLANNING', 0),
     ('Underwater Cave Exploration', 'Dive into the depths to explore underwater caves', 10, '2025-06-15', '2025-06-25', 10, 10000, 10, 9, 'IN_PROGRESS', 0),
-    ('Mystical Caves Exploration', 'Discover hidden caves and underground wonders', 10, '2024-08-15', '2024-08-25', 10, 9500, 10, 9, 'IN_PROGRESS', 0);
+    ('Mystical Caves Exploration', 'Discover hidden caves and underground wonders', 10, '2024-08-15', '2024-08-25', 10, 9500, 10, 9, 'IN_PROGRESS', 0),
+    ('Northern Lights Expedition', 'Chase the mesmerizing Northern Lights', 2, '2025-07-01', '2025-07-10', 3, 8500, 11, 10, 'PLANNING', 0),
+    ('Desert Safari Adventure', 'Explore the vast beauty of desert landscapes', 4, '2025-08-15', '2025-08-25', 4, 9000, 10, 9, 'IN_PROGRESS', 0),
+    ('Mediterranean Cruise', 'Sail along the beautiful Mediterranean coast', 5, '2025-09-10', '2025-09-20', 5, 11000, 11, 10, 'PLANNING', 0),
+    ('Mountain Yoga Retreat', 'Relax and rejuvenate with mountain yoga sessions', 8, '2025-10-05', '2025-10-15', 6, 7500, 10, 9, 'FINISHED', 0),
+    ('Aurora Borealis Photography Tour', 'Capture the magic of the Aurora Borealis on film', 1, '2025-11-01', '2025-11-10', 7, 10000, 10, 9, 'PLANNING', 0),
+    ('Tuscany Vineyard Experience', 'Indulge in the charm of Tuscany vineyards and wines', 2, '2025-12-05', '2025-12-15', 8, 12000, 11, 10, 'IN_PROGRESS', 0),
+    ('Amazon Rainforest Expedition', 'Discover the biodiversity of the Amazon Rainforest', 6, '2026-01-01', '2026-01-10', 9, 9500, 10, 9, 'PLANNING', 0),
+    ('Carnival Celebration in Rio', 'Join the vibrant Carnival celebration in Rio de Janeiro', 6, '2026-02-15', '2026-02-25', 10, 8000, 11, 10, 'IN_PROGRESS', 0),
+    ('Baltic Sea Cruise', 'Sail through the picturesque Baltic Sea', 10, '2026-03-10', '2026-03-20', 1, 7000, 11, 10, 'PLANNING', 0),
+    ('Dubai Luxury Getaway', 'Experience luxury in the heart of Dubai', 4, '2026-04-05', '2026-04-15', 2, 8500, 10, 9, 'FINISHED', 0),
+    ('Inca Trail Trek', 'Embark on a challenging trek along the Inca Trail', 4, '2026-05-01', '2026-05-10', 3, 11000, 11, 10, 'PLANNING', 0),
+    ('Greek Island Hopping', 'Explore the beauty of Greek islands on a magical journey', 5, '2026-06-15', '2026-06-25', 4, 9500, 11, 10, 'IN_PROGRESS', 0),
+    ('Maui Beach Retreat', 'Relax on the pristine beaches of Maui', 7, '2026-07-01', '2026-07-10', 5, 12000, 10, 9, 'PLANNING', 0),
+    ('Wildlife Safari in Kenya', 'Witness the incredible wildlife of Kenya', 8, '2026-08-15', '2026-08-25', 6, 10000, 10, 9, 'IN_PROGRESS', 0),
+    ('Northern Italy Road Trip', 'Drive through the picturesque landscapes of Northern Italy', 2, '2026-09-10', '2026-09-20', 7, 8000, 11, 10, 'PLANNING', 0),
+    ('Grand Canyon Adventure', 'Explore the wonders of the Grand Canyon', 3, '2026-10-05', '2026-10-15', 8, 7000, 11, 10, 'IN_PROGRESS', 0),
+    ('Cappadocia Hot Air Balloon Ride', 'Soar above the unique landscapes of Cappadocia', 9, '2026-11-01', '2026-11-10', 9, 8500, 10, 9, 'PLANNING', 0),
+    ('Venetian Carnival Experience', 'Participate in the festive Venetian Carnival', 2, '2026-12-05', '2026-12-15', 10, 11000, 11, 10, 'IN_PROGRESS', 0),
+    ('Thailand Island Paradise', 'Relax on the stunning beaches of Thailand', 6, '2027-01-01', '2027-01-10', 1, 9500, 10, 9, 'PLANNING', 0),
+    ('Trans-Siberian Railway Adventure', 'Journey on the iconic Trans-Siberian Railway', 10, '2027-02-15', '2027-02-25', 2, 12000, 11, 10, 'IN_PROGRESS', 0),
+    ('Amalfi Coast Getaway', 'Discover the charm of the Amalfi Coast', 2, '2027-03-10', '2027-03-20', 3, 10000, 11, 10, 'PLANNING', 0),
+    ('Himalayan Trekking Expedition', 'Challenge yourself with a trek in the Himalayas', 1, '2027-04-05', '2027-04-15', 4, 8000, 10, 9, 'FINISHED', 0),
+    ('Cherry Blossom Festival in Japan', 'Witness the beauty of cherry blossoms in Japan', 9, '2027-05-01', '2027-05-10', 5, 7000, 11, 10, 'PLANNING', 0);
 
 INSERT INTO JOURNEY_PLACE (journey_id, place_id)
 VALUES
