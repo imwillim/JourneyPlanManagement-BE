@@ -40,7 +40,7 @@ public class JourneyServiceImpl implements JourneyService {
     private final CountryService countryService;
     private final PlaceService placeService;
 
-    private final List<String> allowSearchParams = new ArrayList<>(Arrays.asList("country","status","currency","name,description","startDate","fromAmount","toAmount","fromEndDate","toEndDate","toStartDate","fromStartDate","description"));
+    private final List<String> allowSearchParams = new ArrayList<>(Arrays.asList("country", "status", "currency", "name,description", "startDate", "fromAmount", "toAmount", "fromEndDate", "toEndDate", "toStartDate", "fromStartDate", "description"));
 
 
     private final CurrencyService currencyService;
@@ -63,8 +63,7 @@ public class JourneyServiceImpl implements JourneyService {
 
     @Override
     public void create(CreateJourneyDTO createJourneyDTO) {
-        validateNullFields(createJourneyDTO);
-        if (createJourneyDTO.getEndDate() != null && createJourneyDTO.getDay() != null&& createJourneyDTO.getNight()!= null) {
+        if (createJourneyDTO.getEndDate() != null && createJourneyDTO.getDay() != null && createJourneyDTO.getNight() != null) {
             processIntervalValidation(createJourneyDTO.getStartDate(), createJourneyDTO.getEndDate(), createJourneyDTO.getDay(), createJourneyDTO.getNight());
         }
         Journey journey = applicationMapper.getJourneyFromDTO(createJourneyDTO);
@@ -78,22 +77,6 @@ public class JourneyServiceImpl implements JourneyService {
         journeyRepository.save(journey);
     }
 
-    private void validateNullFields(CreateJourneyDTO createJourneyDTO) {
-        if (createJourneyDTO.getName() == null) {
-            throw new IllegalArgumentException("Name should not be null");
-        }
-        if (createJourneyDTO.getDescription() == null) {
-            throw new IllegalArgumentException("Description should not be null");
-        }
-        if (createJourneyDTO.getStartDate() == null) {
-            throw new IllegalArgumentException("Start date should not be null");
-        }
-
-        if (createJourneyDTO.getStatus() == null) {
-            throw new IllegalArgumentException("Status should not be null");
-        }
-
-    }
 
     @Override
     public void update(Long id, UpdateJourneyDTO updateJourneyDTO) {
@@ -281,6 +264,7 @@ public class JourneyServiceImpl implements JourneyService {
         result.put("totalPage", page.getTotalPages());
         result.put("journeys", page.getContent().stream().map(applicationMapper::getJourneyDTOFromJourney));
         result.put("hasNextPage", page.hasNext());
+        result.put("hasPreviousPage", page.hasPrevious());
         result.put("totalElements", page.getTotalElements());
         return result;
     }
