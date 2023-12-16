@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.elca.training.model.dto.CountryDTO;
+import vn.elca.training.model.dto.CurrencyDTO;
 import vn.elca.training.model.dto.PlaceDTO;
 import vn.elca.training.model.entity.Country;
 import vn.elca.training.model.entity.Place;
@@ -13,6 +14,8 @@ import vn.elca.training.service.CountryService;
 import vn.elca.training.service.PlaceService;
 import vn.elca.training.util.ApplicationMapper;
 
+import java.util.Comparator;
+import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -42,11 +45,15 @@ public class CountryServiceImpl implements CountryService {
     public Set<CountryDTO> getAll() {
         Set<Country> countries = countryRepository.getAll();
         return countries.stream().map((applicationMapper::getCountryDTOFromCountry
-        )).collect(Collectors.toSet());
+        )).sorted(Comparator.comparing(CountryDTO::getName))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     public Set<PlaceDTO> getPlacesByCountry(String country) {
         Set<Place> places = placeService.getPlacesByCountry(country.toUpperCase());
-        return places.stream().map(applicationMapper::getPlaceDTOFromPlace).collect(Collectors.toSet());
+        return places.stream().map(applicationMapper::getPlaceDTOFromPlace)
+                .sorted(Comparator.comparing(PlaceDTO::getName))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+
     }
 }

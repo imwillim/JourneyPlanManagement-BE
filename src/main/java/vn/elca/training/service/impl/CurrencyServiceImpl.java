@@ -1,6 +1,7 @@
 package vn.elca.training.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.elca.training.model.dto.CurrencyDTO;
@@ -9,6 +10,8 @@ import vn.elca.training.repository.CurrencyRepository;
 import vn.elca.training.service.CurrencyService;
 import vn.elca.training.util.ApplicationMapper;
 
+import java.util.Comparator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -35,7 +38,10 @@ public class CurrencyServiceImpl implements CurrencyService {
     public Set<CurrencyDTO> getAll() {
         List<Currency> currencies = currencyRepository.findAll();
         return currencies.stream().map(applicationMapper::getCurrencyDTOFromCurrency)
-                .collect(Collectors.toSet());
+                .sorted(Comparator.comparing(CurrencyDTO::getCode))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
 
     }
+
+
 }
