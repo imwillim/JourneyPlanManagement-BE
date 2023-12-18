@@ -25,7 +25,8 @@ public class ApplicationMapper {
         journey.setAmount(journeyDTO.getAmount());
         journey.setStartDate(journeyDTO.getStartDate());
         journey.setEndDate(journeyDTO.getEndDate());
-        journey.setStatus(Journey.JourneyStatus.valueOf(journeyDTO.getStatus().toUpperCase()));
+        journey.setStatus(Journey.JourneyStatus.valueOf(journeyDTO.getStatus()
+                .replace(" ", "_").toUpperCase()));
         if(journeyDTO.getDay() != null) {
             journey.setDays(journeyDTO.getDay());
         }
@@ -34,8 +35,8 @@ public class ApplicationMapper {
         }
         return journey;
     }
-    public CreateJourneyDTO getJourneyFormDTOFromJourney(Journey journey) {
-        CreateJourneyDTO journeyDTO = new CreateJourneyDTO();
+    public UpdateJourneyDTO getJourneyFormDTOFromJourney(Journey journey) {
+        UpdateJourneyDTO journeyDTO = new UpdateJourneyDTO();
         journeyDTO.setName(journey.getName());
         journeyDTO.setDescription(journey.getDescription());
         if (journey.getAmount() != null ) {
@@ -56,6 +57,7 @@ public class ApplicationMapper {
         if(journey.getCurrency() != null) {
             journeyDTO.setCurrency(journey.getCurrency().getCode());
         }
+        journeyDTO.setVersion(journey.getVersion());
         return journeyDTO;
     }
 
@@ -76,6 +78,7 @@ public class ApplicationMapper {
         if(journey.getCurrency() != null) {
             journeyDTO.setCurrency(journey.getCurrency().getCode());
         }
+        journeyDTO.setVersion(journey.getVersion());
         return journeyDTO;
     }
 

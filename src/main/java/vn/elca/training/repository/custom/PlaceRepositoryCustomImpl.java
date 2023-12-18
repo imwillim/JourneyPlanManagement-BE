@@ -47,7 +47,7 @@ public class PlaceRepositoryCustomImpl implements PlaceRepositoryCustom{
                 .from(QPlace.place)
                 .leftJoin(QPlace.place.country).fetchJoin()
                 .where(QPlace.place.country.name.eq(country))
-                .orderBy(QPlace.place.name.lower().asc())
+                .orderBy(QPlace.place.name.upper().asc())
                 .fetch();
         return new HashSet<>(places);
     }

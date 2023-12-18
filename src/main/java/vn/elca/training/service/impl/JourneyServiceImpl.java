@@ -1,6 +1,7 @@
 package vn.elca.training.service.impl;
 
 
+import org.hibernate.StaleObjectStateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.elca.training.model.dto.CreateJourneyDTO;
+import vn.elca.training.model.dto.JourneyDTO;
 import vn.elca.training.model.dto.UpdateJourneyDTO;
 import vn.elca.training.model.entity.Journey;
 import vn.elca.training.repository.JourneyRepository;
@@ -93,7 +95,17 @@ public class JourneyServiceImpl implements JourneyService {
             newJourney.setCurrency(currencyService.getCurrency(updateJourneyDTO.getCurrency()));
         }
         newJourney.setId(journey.getId());
-        journeyRepository.save(newJourney);
+        saveWithOptimisticLocking(newJourney, updateJourneyDTO);
+    }
+
+    void saveWithOptimisticLocking(Journey newJourney, UpdateJourneyDTO journeyDTO) {
+        try {
+            newJourney.setVersion(journeyDTO.getVersion());
+            journeyRepository.save(newJourney);
+        } catch (StaleObjectStateException e) {
+            logger.error(e.getMessage());
+            throw e;
+        }
     }
 
     @Override
@@ -105,7 +117,7 @@ public class JourneyServiceImpl implements JourneyService {
 
 
     private void validateDate(LocalDate startDate, LocalDate endDate) {
-        if (!startDate.isBefore(endDate)) {
+        if (endDate.isBefore(startDate)) {
             throw new IllegalArgumentException("End date must be larger than start date");
         }
     }
@@ -118,9 +130,15 @@ public class JourneyServiceImpl implements JourneyService {
         }
     }
 
-    private void validateDuration(int day, int duration) throws IllegalArgumentException {
-        if (day > duration) {
+    private void validateDayDuration(int day, int duration) throws IllegalArgumentException {
+        if (day > duration + 1) {
             throw new IllegalArgumentException("Duration field: Day does not match with Start date and End date.");
+        }
+    }
+
+    private void validateNightDuration(int night, int duration) throws IllegalArgumentException {
+        if (night > duration + 1) {
+            throw new IllegalArgumentException("Duration field: Night does not match with Start date and End date.");
         }
     }
 
@@ -128,7 +146,8 @@ public class JourneyServiceImpl implements JourneyService {
         validateDate(startDate, endDate);
         validateDateNightParams(day, night);
         Period period = Period.between(startDate, endDate);
-        validateDuration(day, period.getDays() + 1);
+        validateDayDuration(day, period.getDays());
+        validateNightDuration(night, period.getDays());
     }
 
     @Override
@@ -266,6 +285,7 @@ public class JourneyServiceImpl implements JourneyService {
         result.put("hasNextPage", page.hasNext());
         result.put("hasPreviousPage", page.hasPrevious());
         result.put("totalElements", page.getTotalElements());
+        result.put("numberOfElements", page.getNumberOfElements());
         return result;
     }
 

@@ -1,5 +1,7 @@
 package vn.elca.training.model.entity;
 
+import org.hibernate.annotations.BatchSize;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -23,6 +25,7 @@ public class Journey extends BaseEntity{
             joinColumns = @JoinColumn(name = "journey_id"),
             inverseJoinColumns = @JoinColumn(name = "place_id")
     )
+    @BatchSize(size = 10)
     private Set<Place> places;
 
     @Column(nullable = false)

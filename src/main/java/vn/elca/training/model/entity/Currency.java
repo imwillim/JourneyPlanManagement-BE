@@ -1,8 +1,11 @@
 package vn.elca.training.model.entity;
+import org.hibernate.annotations.BatchSize;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
+@BatchSize(size = 10)
 public class Currency extends BaseEntity{
     @Column(length = 3, nullable = false, unique = true)
     private String code;
