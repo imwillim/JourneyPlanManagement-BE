@@ -43,7 +43,7 @@ public class JourneyRepositoryCustomImpl implements JourneyRepositoryCustom {
                 for (String eachKey : keys) {
                     searchBy = Expressions.path(String.class, journey, eachKey);
                     // builder.or(Expressions.predicate(Ops.valueOf(expressionOperator), searchBy, Expressions.constant(expressionValue)));
-                    builder.or(Expressions.predicate(Ops.valueOf(expressionOperator), Expressions.stringTemplate("lower({0})", searchBy), Expressions.constant(expressionValue)));
+                    builder.or(Expressions.predicate(Ops.valueOf(expressionOperator), Expressions.stringTemplate("upper({0})", searchBy), Expressions.constant(expressionValue)));
                 }
             } else {
                 builder.and(Expressions.predicate(Ops.valueOf(expressionOperator), searchBy, Expressions.constant(expressionValue)));
@@ -123,7 +123,7 @@ public class JourneyRepositoryCustomImpl implements JourneyRepositoryCustom {
                 result.put(key, createExpression("EQ", value.toUpperCase(), "currency.code"));
                 break;
             case "name,description":
-                result.put(key, createExpression("LIKE", '%' + value.toLowerCase() + '%', key));
+                result.put(key, createExpression("LIKE", '%' + value.toUpperCase() + '%', key));
                 break;
             default:
                 break;

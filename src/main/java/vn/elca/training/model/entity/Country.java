@@ -1,12 +1,16 @@
 package vn.elca.training.model.entity;
 
 
+import org.hibernate.annotations.BatchSize;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
+@BatchSize(size = 10)
+
 public class Country extends BaseEntity{
     @Column(name = "name")
     private String name;

@@ -1,9 +1,12 @@
 package vn.elca.training.model.entity;
 
+import org.hibernate.annotations.BatchSize;
+
 import javax.persistence.*;
 
 
 @Entity
+@BatchSize(size = 10)
 public class Place extends BaseEntity {
     @Column(name = "name")
     private String name;

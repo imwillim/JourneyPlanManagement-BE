@@ -18,7 +18,7 @@ public class CountryRepositoryCustomImpl implements CountryRepositoryCustom{
         JPAQueryFactory queryFactory = new JPAQueryFactory(em);
         List<Country> countries =
                 queryFactory.selectFrom(QCountry.country)
-                        .orderBy(QCountry.country.name.toLowerCase().asc())
+                        .orderBy(QCountry.country.name.toUpperCase().asc())
                 .fetch();
         return new HashSet<>(countries);
     }

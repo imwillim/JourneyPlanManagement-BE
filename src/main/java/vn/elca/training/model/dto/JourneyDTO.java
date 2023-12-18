@@ -22,6 +22,7 @@ public class JourneyDTO {
     private String currency;
     private BigDecimal amount;
     private String status;
+    private Long version;
 
     public String getName() {
         return name;
@@ -85,5 +86,13 @@ public class JourneyDTO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Long getVersion(){
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 }
